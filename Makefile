@@ -1,6 +1,6 @@
 # VARIABLES
 DOCKER_COMPOSE = docker compose
-CONTAINER      = webserver
+CONTAINER      = webserver-auth
 EXEC           = docker exec -t --user=root $(CONTAINER)
 EXEC_PHP       = $(EXEC) php
 SYMFONY        = $(EXEC_PHP) bin/console
@@ -51,6 +51,7 @@ rebuild:
 	@echo "🔥 Rebuild container!!!"
 	$(DOCKER_COMPOSE) build --pull --force-rm --no-cache
 	make start
+	make deps
 
 # 🧪 Tests
 test: create_env_file

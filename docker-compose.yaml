@@ -1,16 +1,16 @@
 version: "3.9"
 services:
-  webserver:
+  webserver-auth:
     build:
       context: ${PWD}/.docker
       args:
         PHP_VERSION: 8.2
     env_file:
       - .env
-    container_name: 'webserver'
+    container_name: 'webserver-auth'
     restart: 'unless-stopped'
     ports:
-      - "41:80"
+      - "81:80"
     volumes:
       - ./:/var/www/html
       - ${PWD}/.docker/config/webserver/php.ini:/usr/local/etc/php/php.ini
