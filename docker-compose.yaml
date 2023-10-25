@@ -18,3 +18,18 @@ services:
     environment:
       XDEBUG_CONFIG: "client_host=host.docker.internal"
       PHP_CS_FIXER_IGNORE_ENV: 1
+  database-auth:
+    container_name: database-auth
+    image: postgres:${POSTGRES_VERSION:-15}-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+      # You should definitely change the password in production
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+    volumes:
+      - database_data:/var/lib/postgresql/data:rw
+
+volumes:
+  database_data:
