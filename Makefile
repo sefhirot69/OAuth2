@@ -55,7 +55,7 @@ rebuild:
 
 # 🧪 Tests
 test: create_env_file
-	docker exec -t $(CONTAINER) ./vendor/bin/phpunit -v
+	docker exec -t $(CONTAINER) ./vendor/bin/phpunit
 
 test/coverage: create_env_file
 	docker exec -t $(CONTAINER) ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.xml --order-by=random
