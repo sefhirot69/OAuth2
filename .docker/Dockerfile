@@ -26,8 +26,12 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN chown -R www-data:www-data /var/www/html/
 RUN chmod -R u+rwx /var/www/html/
 
+ADD genrsa.sh /root/genrsa.sh
+
+RUN chmod +x /root/genrsa.sh
+
 # Expose port
 EXPOSE 80
 
 # Run application
-CMD [ "apache2-foreground" ]
+CMD [ "/root/genrsa.sh", "apache2-foreground" ]
