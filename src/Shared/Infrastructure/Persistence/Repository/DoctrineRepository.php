@@ -31,6 +31,11 @@ abstract class DoctrineRepository
         $this->entityManager()->flush();
     }
 
+    /**
+     * @param class-string $entityClass
+     *
+     * @return EntityRepository<object>
+     */
     protected function repository(string $entityClass): EntityRepository
     {
         return $this->entityManager->getRepository($entityClass);
