@@ -6,6 +6,11 @@ namespace App\Shared\Domain\ValueObject;
 
 abstract class StringValueObject
 {
+    public function __construct(
+        protected string $value
+    ) {
+    }
+
     abstract public function __toString(): string;
 
     abstract public function value(): string;
