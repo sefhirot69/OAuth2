@@ -101,4 +101,9 @@ final class Client extends AggregateRoot
 
         return in_array($grant, $grants, true);
     }
+
+    public function getRedirectUris(): ?array
+    {
+        return $this->redirectUris;
+    }
 }

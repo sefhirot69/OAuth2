@@ -29,9 +29,8 @@ final class ClientGrantType extends JsonType
         }
 
         try {
-            /** @var Grant $val */
             /** @var Grant[] $value */
-            $map = array_map(static fn ($val): string => $val->value, $value);
+            $map = array_map(static fn (Grant $val): string => $val->value, $value);
 
             return json_encode($map, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION);
         } catch (\JsonException $e) {

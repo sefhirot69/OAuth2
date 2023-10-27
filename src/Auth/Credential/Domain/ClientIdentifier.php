@@ -10,7 +10,7 @@ final class ClientIdentifier extends StringValueObject
 {
     public function __toString(): string
     {
-        // TODO: Implement __toString() method.
+        return $this->value();
     }
 
     public static function fromString(string $value): self
@@ -28,6 +28,6 @@ final class ClientIdentifier extends StringValueObject
 
     public function value(): string
     {
-        // TODO: Implement value() method.
+        return $this->value;
     }
 }

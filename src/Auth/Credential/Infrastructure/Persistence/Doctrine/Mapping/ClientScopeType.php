@@ -29,9 +29,8 @@ final class ClientScopeType extends JsonType
         }
 
         try {
-            /** @var Scope $val */
             /** @var Scope[] $value */
-            $map = array_map(static fn ($val): string => $val->value, $value);
+            $map = array_map(static fn (Scope $val): string => $val->value, $value);
 
             return json_encode($map, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION);
         } catch (\JsonException $e) {
