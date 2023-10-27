@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth\Infrastructure\Persistence\Doctrine\Mapping\Client;
+namespace App\Auth\Credential\Infrastructure\Persistence\Doctrine\Mapping;
 
 use App\Auth\Credential\Domain\Scope;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
