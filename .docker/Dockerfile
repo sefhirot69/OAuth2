@@ -12,8 +12,7 @@ RUN apt-get update -qq \
     && docker-php-ext-install zip \
     && docker-php-ext-install soap \
     && docker-php-ext-install pdo \
-    && docker-php-ext-install pdo_mysql\
-    && docker-php-ext-install mysqli
+    && docker-php-ext-install pdo_pgsql
 
 RUN docker-php-ext-enable xdebug
 RUN a2enmod rewrite
