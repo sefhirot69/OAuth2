@@ -11,9 +11,9 @@ final class Client extends AggregateRoot
 {
     public function __construct(
         private UuidInterface $id,
-        private readonly array $grants,
-        private readonly ClientCredentialsParam $credentials,
-        private readonly array $scopes,
+        private readonly array $grants, // TODO pasar a una coleccion
+        private readonly ClientCredentialParam $credentials,
+        private readonly array $scopes, // TODO pasar a una coleccion
         private readonly ?array $redirectUris = null,
         private readonly bool $active = true,
     ) {
@@ -22,7 +22,7 @@ final class Client extends AggregateRoot
     public static function create(
         UuidInterface $id,
         array $grants,
-        ClientCredentialsParam $credentials,
+        ClientCredentialParam $credentials,
         array $scopes,
         array $redirectUris = null,
         bool $active = true,
@@ -42,7 +42,7 @@ final class Client extends AggregateRoot
         return $this->id;
     }
 
-    public function getCredentials(): ClientCredentialsParam
+    public function getCredentials(): ClientCredentialParam
     {
         return $this->credentials;
     }
@@ -71,35 +71,6 @@ final class Client extends AggregateRoot
     public function isActive(): bool
     {
         return $this->active;
-    }
-
-    public function ensureIsActive(): bool
-    {
-        if (!$this->isActive()) {
-            throw ClientOperationDeniedException::inactive($this->getIdentifier());
-        }
-
-        return true;
-    }
-
-    public function ensureGrantSupported(Grant $grant): bool
-    {
-        if (!$this->isGrantSupported($grant)) {
-            throw ClientOperationDeniedException::grantNotSupported($this->getIdentifier(), $grant);
-        }
-
-        return true;
-    }
-
-    public function isGrantSupported(Grant $grant): bool
-    {
-        $grants = $this->getGrants();
-
-        if (empty($grants)) {
-            return false;
-        }
-
-        return in_array($grant, $grants, true);
     }
 
     public function getRedirectUris(): ?array

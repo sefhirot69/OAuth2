@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Auth\Credential\Domain;
 
-final class ClientCredentialsParam
+final class ClientCredentialParam
 {
     public function __construct(
         private readonly ClientIdentifier $identifier,
@@ -28,7 +28,7 @@ final class ClientCredentialsParam
     /**
      * @throws \Exception
      */
-    public static function createByName(
+    public static function createFromName(
         ClientName $name,
     ): self {
         return new self(
