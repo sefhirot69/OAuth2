@@ -47,9 +47,19 @@ final class Client extends AggregateRoot
         return $this->credentials;
     }
 
-    public function getIdentifier(): ClientIdentifier
+    public function getIdentifier(): string
     {
         return $this->getCredentials()->getIdentifier();
+    }
+
+    public function getSecret(): string
+    {
+        return $this->getCredentials()->getSecret();
+    }
+
+    public function getName(): string
+    {
+        return $this->getCredentials()->getName();
     }
 
     /**

@@ -38,18 +38,18 @@ final class ClientCredentialParam
         );
     }
 
-    public function getIdentifier(): ClientIdentifier
+    public function getIdentifier(): string
     {
-        return $this->identifier;
+        return $this->identifier->value();
     }
 
-    public function getName(): ClientName
+    public function getName(): string
     {
-        return $this->name;
+        return $this->name->value();
     }
 
-    public function getSecret(): ClientSecret
+    public function getSecret(): string
     {
-        return $this->secret;
+        return $this->secret->value();
     }
 }
