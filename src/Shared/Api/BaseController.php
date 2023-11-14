@@ -64,9 +64,13 @@ abstract class BaseController extends AbstractController
         );
     }
 
-    protected function validationRequest(Request $request, string $class): mixed
+    protected function validationRequest(Request $request, string $class): RequestDto
     {
         $objectDto = $this->deserialize($request, $class);
+
+        if (!$objectDto instanceof RequestDto) {
+            throw new \InvalidArgumentException(sprintf('The class %s must implement %s', $class, RequestDto::class));
+        }
 
         $validationErrors = $this->validator->validate($objectDto);
 
