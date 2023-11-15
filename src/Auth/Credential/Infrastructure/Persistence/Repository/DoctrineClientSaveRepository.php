@@ -6,11 +6,12 @@ namespace App\Auth\Credential\Infrastructure\Persistence\Repository;
 
 use App\Auth\Credential\Domain\Client;
 use App\Auth\Credential\Domain\ClientSaveRepository;
+use App\Shared\Infrastructure\Persistence\Repository\DoctrineRepository;
 
-final class DoctrineClientSaveRepository implements ClientSaveRepository
+final class DoctrineClientSaveRepository extends DoctrineRepository implements ClientSaveRepository
 {
     public function save(Client $client): void
     {
-        return;
+        $this->persist($client);
     }
 }
