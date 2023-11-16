@@ -85,6 +85,13 @@ lint-diff:
 static-analysis:
 	$(DOCKER_COMPOSE) exec -it $(CONTAINER) ./vendor/bin/phpstan analyse -c phpstan.neon.dist
 
+# Infrastructure Database
+create-db: create-db/dev create-db/test
+create-db/dev:
+	$(SYMFONY) doctrine:database:create --env=dev --no-interaction
+create-db/test:
+	$(SYMFONY) doctrine:database:create --env=test --no-interaction
+
 migrate: migrate/dev migrate/test
 migrate/dev:
 	$(SYMFONY) doctrine:migration:migrate --env=dev --no-interaction
