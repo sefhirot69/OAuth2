@@ -26,7 +26,7 @@ jobs:
 
       - name: Create DB and Migrations
         run: |
-          make create-db &&
+          make create-db/test &&
           make migrate
 
       - name:  ✅ Tests
