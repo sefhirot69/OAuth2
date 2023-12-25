@@ -43,5 +43,12 @@ final class GenerateTokenControllerTest extends WebTestCase
         // THEN
 
         self::assertResponseIsSuccessful();
+
+        /*
+         * TODO: Check response body
+         * access_token
+         * token_type
+         * expires_in
+         */
     }
 }
