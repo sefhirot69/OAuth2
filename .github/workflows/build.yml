@@ -24,8 +24,10 @@ jobs:
       - name: 🏁 Static analysis
         run: make static-analysis
 
-      - name: Migrations
-        run: make migrate
+      - name: Create DB and Migrations
+        run: |
+          make create-db &&
+          make migrate
 
       - name:  ✅ Tests
         run: make test/coverage
