@@ -52,6 +52,7 @@ rebuild:
 	$(DOCKER_COMPOSE) build --pull --force-rm --no-cache
 	make start
 	make deps
+	make migrate
 
 # 🧪 Tests
 test: create_env_file
