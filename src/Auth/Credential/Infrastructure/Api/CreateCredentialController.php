@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Auth\Credential\Infrastructure\Api;
 
+use App\Auth\Credential\Infrastructure\Api\Dto\CreateClientRequestDto;
 use App\Shared\Api\BaseController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

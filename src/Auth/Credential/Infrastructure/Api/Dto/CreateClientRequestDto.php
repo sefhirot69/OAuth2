@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Credential\Infrastructure\Api;
+namespace App\Auth\Credential\Infrastructure\Api\Dto;
 
 use App\Auth\Credential\Application\Command\CreateCredentialCommand;
 use App\Shared\Api\RequestDto;
