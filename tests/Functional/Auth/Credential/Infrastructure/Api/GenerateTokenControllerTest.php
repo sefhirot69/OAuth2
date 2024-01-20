@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Auth\Credential\Infrastructure\Api;
 
+use App\Tests\Common\Auth\Credential\Infrastructure\Api\Dto\GenerateTokenRequestDtoMother;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -21,11 +22,7 @@ final class GenerateTokenControllerTest extends WebTestCase
     {
         // GIVEN
 
-        $credentials = [
-            'grantType'    => 'client_credentials',
-            'clientId'     => 'admin',
-            'clientSecret' => 'admin',
-        ];
+        $credentials = GenerateTokenRequestDtoMother::clientCredential();
 
         // WHEN
 
