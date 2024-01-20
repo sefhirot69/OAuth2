@@ -31,7 +31,7 @@ composer-update cu: ACTION=update $(module)
 
 composer-require cr: ACTION=require $(module)
 
-composer composer-install ci composer-update composer-require cr: create_env_file
+composer composer-install ci composer-update cu composer-require cr: create_env_file
 	$(COMPOSER) $(ACTION) \
 			--ignore-platform-reqs \
 			--no-ansi
@@ -52,6 +52,8 @@ rebuild:
 	$(DOCKER_COMPOSE) build --pull --force-rm --no-cache
 	make start
 	make deps
+	make create-db
+	make migrate
 
 # 🧪 Tests
 test: create_env_file
