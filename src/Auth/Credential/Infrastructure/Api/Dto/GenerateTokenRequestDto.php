@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Auth\Credential\Infrastructure\Api\Dto;
 
+use App\Auth\Credential\Application\Command\GenerateTokenCommand;
 use App\Shared\Api\RequestDto;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -41,5 +42,14 @@ final class GenerateTokenRequestDto implements RequestDto, \JsonSerializable
             'clientId'     => $this->clientId,
             'clientSecret' => $this->clientSecret,
         ];
+    }
+
+    public function toCommand(): GenerateTokenCommand
+    {
+        return new GenerateTokenCommand(
+            $this->getGrantType(),
+            $this->getClientId(),
+            $this->getClientSecret(),
+        );
     }
 }
