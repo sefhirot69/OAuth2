@@ -6,18 +6,26 @@ namespace App\Auth\Credential\Infrastructure\Api;
 
 use App\Auth\Credential\Infrastructure\Api\Dto\GenerateTokenRequestDto;
 use App\Shared\Api\BaseController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
 
 final class GenerateTokenController extends BaseController
 {
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request): JsonResponse
     {
         /** @var GenerateTokenRequestDto $requestDto */
         $requestDto = $this->validationRequest($request, GenerateTokenRequestDto::class);
 
-        return new Response();
+        $accessToken = $this->command(
+            $requestDto->toCommand()
+        );
+
+        return new JsonResponse(
+            $accessToken,
+            Response::HTTP_OK
+        );
     }
 
     protected function exceptions(): array

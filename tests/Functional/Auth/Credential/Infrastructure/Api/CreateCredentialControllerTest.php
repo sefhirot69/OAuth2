@@ -2,7 +2,7 @@
 
 namespace App\Tests\Functional\Auth\Credential\Infrastructure\Api;
 
-use App\Tests\Common\MotherFactory;
+use App\Tests\Common\Factory\MotherFactory;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

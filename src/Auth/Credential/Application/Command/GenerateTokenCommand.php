@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Auth\Credential\Application\Command;
 
-final class GenerateTokenCommand
+use App\Shared\Domain\Bus\Command\Command;
+
+final class GenerateTokenCommand implements Command
 {
     public function __construct(
         private readonly string $grantType,

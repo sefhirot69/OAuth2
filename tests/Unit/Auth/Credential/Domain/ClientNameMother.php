@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Auth\Credential\Domain;
 
 use App\Auth\Credential\Domain\ClientName;
-use App\Tests\Common\MotherFactory;
+use App\Tests\Common\Factory\MotherFactory;
 
 final class ClientNameMother
 {

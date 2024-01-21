@@ -8,7 +8,7 @@ use App\Auth\Credential\Domain\Client;
 use App\Auth\Credential\Domain\ClientCredentialParam;
 use App\Auth\Credential\Domain\Grant;
 use App\Auth\Credential\Domain\Scope;
-use App\Tests\Common\MotherFactory;
+use App\Tests\Common\Factory\MotherFactory;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 

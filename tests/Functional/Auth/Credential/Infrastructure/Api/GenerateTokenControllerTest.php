@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Auth\Credential\Infrastructure\Api;
 
-use App\Tests\Common\Auth\Credential\Infrastructure\Api\Dto\GenerateTokenRequestDtoMother;
+use App\Tests\Unit\Auth\Credential\Infrastructure\Api\Dto\GenerateTokenRequestDtoMother;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -40,12 +40,5 @@ final class GenerateTokenControllerTest extends WebTestCase
         // THEN
 
         self::assertResponseIsSuccessful();
-
-        /*
-         * TODO: Check response body
-         * access_token
-         * token_type
-         * expires_in
-         */
     }
 }

@@ -10,8 +10,8 @@ use App\Auth\Credential\Application\Service\AccessTokenFactory;
 use App\Auth\Credential\Application\Service\ClientCredentialAccessTokenMethod;
 use App\Auth\Credential\Domain\ClientFindRepository;
 use App\Auth\Credential\Domain\ClientIdentifier;
-use App\Tests\Common\Auth\Credential\Infrastructure\Api\Dto\GenerateTokenRequestDtoMother;
 use App\Tests\Unit\Auth\Credential\Domain\ClientMother;
+use App\Tests\Unit\Auth\Credential\Infrastructure\Api\Dto\GenerateTokenRequestDtoMother;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

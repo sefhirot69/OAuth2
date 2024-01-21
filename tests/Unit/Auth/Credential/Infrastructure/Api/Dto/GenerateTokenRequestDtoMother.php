@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Common\Auth\Credential\Infrastructure\Api\Dto;
+namespace App\Tests\Unit\Auth\Credential\Infrastructure\Api\Dto;
 
 use App\Auth\Credential\Domain\Grant;
 use App\Auth\Credential\Infrastructure\Api\Dto\GenerateTokenRequestDto;
-use App\Tests\Common\MotherFactory;
+use App\Tests\Common\Factory\MotherFactory;
 
 final class GenerateTokenRequestDtoMother
 {
