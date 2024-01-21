@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Auth\Credential\Application\Command;
 
+use App\Auth\Credential\Application\Command\AccessTokenCommandResponse;
 use App\Auth\Credential\Application\Command\GenerateTokenCommandHandler;
 use App\Auth\Credential\Application\Service\AccessTokenFactory;
 use App\Auth\Credential\Application\Service\ClientCredentialAccessTokenMethod;
@@ -28,15 +29,20 @@ final class GenerateTokenCommandHandlerTest extends TestCase
         $command = $dto->toCommand();
 
         // WHEN
-
+        $accessTokenClass = $this->getMockBuilder(ClientCredentialAccessTokenMethod::class)
+            ->onlyMethods(['getAccessToken'])
+            ->getMock();
         $this->accessTokenFactory
             ->expects(self::once())
             ->method('method')
-            ->willReturn(new ClientCredentialAccessTokenMethod());
+            ->with($command->getGrantType())
+            ->willReturn($accessTokenClass);
 
         // THEN
 
         $handler = new GenerateTokenCommandHandler($this->accessTokenFactory);
-        $handler($command);
+        $result  = $handler($command);
+
+        self::assertInstanceOf(AccessTokenCommandResponse::class, $result);
     }
 }

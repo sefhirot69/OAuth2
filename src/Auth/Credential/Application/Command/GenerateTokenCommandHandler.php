@@ -13,8 +13,10 @@ final class GenerateTokenCommandHandler
     ) {
     }
 
-    public function __invoke(GenerateTokenCommand $command): void
+    public function __invoke(GenerateTokenCommand $command): AccessTokenCommandResponse
     {
-        $this->accessTokenFactory->method($command->getGrantType());
+        $accessToken = $this->accessTokenFactory->method($command->getGrantType())->getAccessToken();
+
+        return AccessTokenCommandResponse::fromAccessToken($accessToken);
     }
 }
