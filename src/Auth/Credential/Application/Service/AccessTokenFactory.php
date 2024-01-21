@@ -12,7 +12,7 @@ class AccessTokenFactory
     {
         return match ($grantType) {
             Grant::PASSWORD->value           => new PasswordAccessTokenMethod(),
-            Grant::CLIENT_CREDENTIALS->value => new ClientCredentialsAccessTokenMethod(),
+            Grant::CLIENT_CREDENTIALS->value => new ClientCredentialAccessTokenMethod(),
             Grant::REFRESH_TOKEN->value      => new RefreshTokenAccessTokenMethod(),
             default                          => throw new \InvalidArgumentException('Invalid grant type')
         };
