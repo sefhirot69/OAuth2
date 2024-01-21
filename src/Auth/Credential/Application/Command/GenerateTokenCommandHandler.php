@@ -7,8 +7,9 @@ namespace App\Auth\Credential\Application\Command;
 use App\Auth\Credential\Application\Service\AccessTokenFactory;
 use App\Auth\Credential\Domain\ClientFindRepository;
 use App\Auth\Credential\Domain\ClientIdentifier;
+use App\Shared\Domain\Bus\Command\CommandHandler;
 
-final class GenerateTokenCommandHandler
+final class GenerateTokenCommandHandler implements CommandHandler
 {
     public function __construct(
         private readonly AccessTokenFactory $accessTokenFactory,

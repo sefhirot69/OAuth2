@@ -31,6 +31,15 @@ final class GenerateTokenRequestDtoMother
         );
     }
 
+    public static function withIdentifier(string $identifier): GenerateTokenRequestDto
+    {
+        return self::create(
+            Grant::PASSWORD->value,
+            $identifier,
+            MotherFactory::random()->uuid(),
+        );
+    }
+
     public static function clientCredential(): GenerateTokenRequestDto
     {
         return self::create(
