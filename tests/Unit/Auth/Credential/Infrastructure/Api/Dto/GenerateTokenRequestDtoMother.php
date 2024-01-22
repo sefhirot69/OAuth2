@@ -48,4 +48,13 @@ final class GenerateTokenRequestDtoMother
             MotherFactory::random()->uuid(),
         );
     }
+
+    public static function clientCredentialWithIdentifier(string $identifier): GenerateTokenRequestDto
+    {
+        return self::create(
+            Grant::CLIENT_CREDENTIALS->value,
+            $identifier,
+            MotherFactory::random()->uuid(),
+        );
+    }
 }

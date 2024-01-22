@@ -29,7 +29,7 @@ final class GenerateTokenControllerTest extends WebTestCase
         $clientFactory = new ClientFactory($this->entityManager);
         /** @var Client $client */
         $client      = $clientFactory->create();
-        $credentials = GenerateTokenRequestDtoMother::withIdentifier($client->getIdentifier());
+        $credentials = GenerateTokenRequestDtoMother::clientCredentialWithIdentifier($client->getIdentifier());
 
         // WHEN
 

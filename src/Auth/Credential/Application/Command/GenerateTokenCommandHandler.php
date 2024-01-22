@@ -29,7 +29,10 @@ final class GenerateTokenCommandHandler implements CommandHandler
             throw new \InvalidArgumentException('Client not found');
         }
 
-        $accessToken = $this->accessTokenFactory->method($command->getGrantType())->getAccessToken();
+        $accessToken = $this->accessTokenFactory->method($command->getGrantType())->getAccessToken(
+            $command,
+            $client
+        );
 
         return AccessTokenCommandResponse::fromAccessToken($accessToken);
     }
