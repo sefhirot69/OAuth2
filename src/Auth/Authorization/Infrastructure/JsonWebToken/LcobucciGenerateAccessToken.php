@@ -1,0 +1,53 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Auth\Authorization\Infrastructure\JsonWebToken;
+
+use App\Auth\Authorization\Domain\AccessToken;
+use App\Auth\Authorization\Domain\GenerateAccessToken;
+use App\Auth\Authorization\Domain\Token;
+use App\Shared\Domain\Utils\Key\CryptKeyPrivate;
+use Lcobucci\JWT\Configuration;
+use Lcobucci\JWT\Signer\Key\InMemory;
+use Lcobucci\JWT\Signer\Rsa\Sha256;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+
+final class LcobucciGenerateAccessToken implements GenerateAccessToken
+{
+    private string $privateKey;
+    private string $publicKey;
+
+    public function __construct(
+        private readonly ParameterBagInterface $parameterBag,
+    ) {
+        $this->privateKey = $this->parameterBag->get('private_key');
+        $this->publicKey  = $this->parameterBag->get('public_key');
+    }
+
+    public function generateAccessToken(Token $token): AccessToken
+    {
+        $privateKey    = CryptKeyPrivate::create($this->privateKey);
+        $configuration = Configuration::forAsymmetricSigner(
+            new Sha256(),
+            InMemory::plainText($privateKey->getKeyContents(), $privateKey->getPassPhrase()),
+            InMemory::plainText('empty', 'empty'),
+        );
+
+        $jwtToken = $configuration->builder()
+            ->permittedFor($token->getClientIdentifier())
+            ->identifiedBy($token->getId()->toString())
+            ->issuedAt(new \DateTimeImmutable())
+            ->expiresAt($token->getExpiresIn())
+            ->canOnlyBeUsedAfter(new \DateTimeImmutable())
+            ->withClaim('scopes', $token->getScopes())
+            ->getToken($configuration->signer(), $configuration->signingKey());
+
+        return AccessToken::create(
+            (string) $jwtToken,
+            'bearer', // TODO: change this for enum
+            $token->getExpiresIn()->getTimestamp(),
+            $token->getRefreshToken(),
+        );
+    }
+}

@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Auth\Authorization\Domain\Factory;
 
+use App\Auth\Authorization\Domain\GenerateAccessToken;
 use App\Auth\Authorization\Domain\TokenSaveRepository;
 use App\Auth\Credential\Domain\Grant;
 
 class AccessTokenFactory
 {
     public function __construct(
-        private readonly GenerateToken $generateToken,
+        private readonly GenerateAccessToken $generateToken,
         private readonly TokenSaveRepository $tokenSaveRepository,
     ) {
     }

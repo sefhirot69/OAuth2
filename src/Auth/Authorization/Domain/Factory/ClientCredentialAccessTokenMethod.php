@@ -6,6 +6,7 @@ namespace App\Auth\Authorization\Domain\Factory;
 
 use App\Auth\Authorization\Application\Command\GenerateTokenCommand;
 use App\Auth\Authorization\Domain\AccessToken;
+use App\Auth\Authorization\Domain\GenerateAccessToken;
 use App\Auth\Authorization\Domain\Token;
 use App\Auth\Authorization\Domain\TokenSaveRepository;
 use App\Auth\Credential\Domain\Client;
@@ -14,7 +15,7 @@ class ClientCredentialAccessTokenMethod implements AccessTokenMethod
 {
     public function __construct(
         private readonly TokenSaveRepository $tokenSaveRepository,
-        private readonly GenerateToken $generateToken,
+        private readonly GenerateAccessToken $generateToken,
     ) {
     }
 
