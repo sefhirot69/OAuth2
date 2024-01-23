@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Credential\Infrastructure\Api\Dto;
+namespace App\Auth\Authorization\Infrastructure\Api\Dto;
 
-use App\Auth\Credential\Application\Command\GenerateTokenCommand;
+use App\Auth\Authorization\Application\Command\GenerateTokenCommand;
 use App\Shared\Api\RequestDto;
 use Symfony\Component\Validator\Constraints as Assert;
 

@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Credential\Domain;
+namespace App\Auth\Authorization\Domain;
 
+use App\Auth\Credential\Domain\Client;
 use App\Shared\Domain\Aggregate\AggregateRoot;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 final class Token extends AggregateRoot
@@ -13,24 +15,17 @@ final class Token extends AggregateRoot
         private readonly UuidInterface $id,
         private readonly Client $client,
         private readonly \DateTimeImmutable $expiresIn,
-        private readonly array $scopes,
-        private readonly bool $revoked,
     ) {
     }
 
     public static function create(
-        UuidInterface $id,
         Client $client,
         \DateTimeImmutable $expiresIn,
-        array $scopes,
-        bool $revoked,
     ): self {
         return new self(
-            $id,
+            Uuid::uuid7(),
             $client,
             $expiresIn,
-            $scopes,
-            true,
         );
     }
 
@@ -47,15 +42,5 @@ final class Token extends AggregateRoot
     public function getExpiresIn(): \DateTimeImmutable
     {
         return $this->expiresIn;
-    }
-
-    public function getScopes(): array
-    {
-        return $this->scopes;
-    }
-
-    public function isRevoked(): bool
-    {
-        return $this->revoked;
     }
 }

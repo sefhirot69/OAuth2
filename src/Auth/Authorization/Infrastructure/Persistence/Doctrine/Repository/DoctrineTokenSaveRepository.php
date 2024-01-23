@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Credential\Infrastructure\Persistence\Repository;
+namespace App\Auth\Authorization\Infrastructure\Persistence\Doctrine\Repository;
 
-use App\Auth\Credential\Domain\Token;
-use App\Auth\Credential\Domain\TokenSaveRepository;
+use App\Auth\Authorization\Domain\Token;
+use App\Auth\Authorization\Domain\TokenSaveRepository;
 use App\Shared\Infrastructure\Persistence\Repository\DoctrineRepository;
 
 final class DoctrineTokenSaveRepository extends DoctrineRepository implements TokenSaveRepository

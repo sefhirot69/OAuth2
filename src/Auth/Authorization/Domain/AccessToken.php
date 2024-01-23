@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Credential\Domain;
+namespace App\Auth\Authorization\Domain;
 
 class AccessToken
 {

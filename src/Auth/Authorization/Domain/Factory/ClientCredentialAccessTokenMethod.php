@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Credential\Application\Service;
+namespace App\Auth\Authorization\Domain\Factory;
 
-use App\Auth\Credential\Application\Command\GenerateTokenCommand;
-use App\Auth\Credential\Domain\AccessToken;
+use App\Auth\Authorization\Application\Command\GenerateTokenCommand;
+use App\Auth\Authorization\Domain\AccessToken;
+use App\Auth\Authorization\Domain\Token;
+use App\Auth\Authorization\Domain\TokenSaveRepository;
 use App\Auth\Credential\Domain\Client;
-use App\Auth\Credential\Domain\Token;
-use App\Auth\Credential\Domain\TokenSaveRepository;
 
 class ClientCredentialAccessTokenMethod implements AccessTokenMethod
 {
@@ -21,7 +21,10 @@ class ClientCredentialAccessTokenMethod implements AccessTokenMethod
     public function getAccessToken(GenerateTokenCommand $command, Client $client): AccessToken
     {
         $this->tokenSaveRepository->save(
-            new Token()
+            Token::create(
+                $client,
+                new \DateTimeImmutable('+8 hour'),
+            )
         );
 
         return AccessToken::create(

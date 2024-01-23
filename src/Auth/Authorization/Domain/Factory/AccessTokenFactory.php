@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Credential\Application\Service;
+namespace App\Auth\Authorization\Domain\Factory;
 
+use App\Auth\Authorization\Domain\TokenSaveRepository;
 use App\Auth\Credential\Domain\Grant;
-use App\Auth\Credential\Domain\TokenSaveRepository;
 
 class AccessTokenFactory
 {

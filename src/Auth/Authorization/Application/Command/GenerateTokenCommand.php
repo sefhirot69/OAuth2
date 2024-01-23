@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Credential\Application\Command;
+namespace App\Auth\Authorization\Application\Command;
 
 use App\Shared\Domain\Bus\Command\Command;
 

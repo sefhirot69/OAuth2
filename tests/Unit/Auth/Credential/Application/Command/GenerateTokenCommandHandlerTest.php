@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Auth\Credential\Application\Command;
 
-use App\Auth\Credential\Application\Command\AccessTokenCommandResponse;
-use App\Auth\Credential\Application\Command\GenerateTokenCommandHandler;
-use App\Auth\Credential\Application\Service\AccessTokenFactory;
-use App\Auth\Credential\Application\Service\ClientCredentialAccessTokenMethod;
+use App\Auth\Authorization\Application\Command\AccessTokenCommandResponse;
+use App\Auth\Authorization\Application\Command\GenerateTokenCommandHandler;
+use App\Auth\Authorization\Domain\Factory\AccessTokenFactory;
+use App\Auth\Authorization\Domain\Factory\ClientCredentialAccessTokenMethod;
 use App\Auth\Credential\Domain\ClientFindRepository;
 use App\Auth\Credential\Domain\ClientIdentifier;
 use App\Tests\Unit\Auth\Credential\Domain\ClientMother;
@@ -46,6 +46,7 @@ final class GenerateTokenCommandHandlerTest extends TestCase
             ->willReturn($clientExpected);
 
         $accessTokenClass = $this->getMockBuilder(ClientCredentialAccessTokenMethod::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['getAccessToken'])
             ->getMock();
         $this->accessTokenFactory

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Credential\Application\Service;
+namespace App\Auth\Authorization\Domain\Factory;
 
 final class GenerateToken
 {

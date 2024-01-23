@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Credential\Application\Command;
+namespace App\Auth\Authorization\Application\Command;
 
-use App\Auth\Credential\Application\Service\AccessTokenFactory;
+use App\Auth\Authorization\Domain\Factory\AccessTokenFactory;
 use App\Auth\Credential\Domain\ClientFindRepository;
 use App\Auth\Credential\Domain\ClientIdentifier;
 use App\Shared\Domain\Bus\Command\CommandHandler;

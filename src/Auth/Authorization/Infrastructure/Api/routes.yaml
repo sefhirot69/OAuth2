@@ -1,0 +1,4 @@
+GenerateToken:
+  path: /tokens
+  controller: App\Auth\Authorization\Infrastructure\Api\GenerateTokenController
+  methods: [POST]

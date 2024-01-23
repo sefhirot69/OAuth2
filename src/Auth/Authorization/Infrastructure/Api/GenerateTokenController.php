@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Credential\Infrastructure\Api;
+namespace App\Auth\Authorization\Infrastructure\Api;
 
-use App\Auth\Credential\Infrastructure\Api\Dto\GenerateTokenRequestDto;
+use App\Auth\Authorization\Infrastructure\Api\Dto\GenerateTokenRequestDto;
 use App\Shared\Api\BaseController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

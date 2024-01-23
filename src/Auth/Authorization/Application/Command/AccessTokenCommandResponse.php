@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Credential\Application\Command;
+namespace App\Auth\Authorization\Application\Command;
 
-use App\Auth\Credential\Domain\AccessToken;
+use App\Auth\Authorization\Domain\AccessToken;
 use App\Shared\Domain\Bus\Command\CommandResponse;
 
 final class AccessTokenCommandResponse implements \JsonSerializable, CommandResponse

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Credential\Application\Service;
+namespace App\Auth\Authorization\Domain\Factory;
 
-use App\Auth\Credential\Application\Command\GenerateTokenCommand;
-use App\Auth\Credential\Domain\AccessToken;
+use App\Auth\Authorization\Application\Command\GenerateTokenCommand;
+use App\Auth\Authorization\Domain\AccessToken;
 use App\Auth\Credential\Domain\Client;
 
-final class PasswordAccessTokenMethod implements AccessTokenMethod
+final class RefreshTokenAccessTokenMethod implements AccessTokenMethod
 {
     public function __construct()
     {
