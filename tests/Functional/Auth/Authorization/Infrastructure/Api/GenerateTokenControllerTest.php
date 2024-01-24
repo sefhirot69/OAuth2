@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Auth\Credential\Infrastructure\Api;
+namespace App\Tests\Functional\Auth\Authorization\Infrastructure\Api;
 
 use App\Auth\Credential\Domain\Client;
 use App\Tests\Unit\Auth\Credential\Domain\ClientFactory;

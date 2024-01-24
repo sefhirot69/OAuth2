@@ -6,5 +6,5 @@ namespace App\Auth\Authorization\Domain;
 
 interface GenerateAccessToken
 {
-    public function generateAccessToken(Token $token): AccessToken;
+    public function generateAccessToken(Token $token, RefreshToken $refreshToken): AccessToken;
 }

@@ -6,6 +6,7 @@ namespace App\Auth\Authorization\Infrastructure\JsonWebToken;
 
 use App\Auth\Authorization\Domain\AccessToken;
 use App\Auth\Authorization\Domain\GenerateAccessToken;
+use App\Auth\Authorization\Domain\RefreshToken;
 use App\Auth\Authorization\Domain\Token;
 use App\Shared\Domain\Utils\Key\CryptKeyPrivate;
 use Lcobucci\JWT\Configuration;
@@ -25,7 +26,7 @@ final class LcobucciGenerateAccessToken implements GenerateAccessToken
         $this->publicKey  = $this->parameterBag->get('public_key');
     }
 
-    public function generateAccessToken(Token $token): AccessToken
+    public function generateAccessToken(Token $token, RefreshToken $refreshToken): AccessToken
     {
         $privateKey    = CryptKeyPrivate::create($this->privateKey);
         $configuration = Configuration::forAsymmetricSigner(
@@ -43,11 +44,20 @@ final class LcobucciGenerateAccessToken implements GenerateAccessToken
             ->withClaim('scopes', $token->getScopes())
             ->getToken($configuration->signer(), $configuration->signingKey());
 
+        $jwtRefreshToken = $configuration->builder()
+            ->permittedFor($refreshToken->getClientIdentifier())
+            ->identifiedBy($refreshToken->getId()->toString())
+            ->issuedAt(new \DateTimeImmutable())
+            ->expiresAt($refreshToken->getExpiresIn())
+            ->canOnlyBeUsedAfter(new \DateTimeImmutable())
+            ->withClaim('scopes', $refreshToken->getScopes())
+            ->getToken($configuration->signer(), $configuration->signingKey());
+
         return AccessToken::create(
-            (string) $jwtToken,
+            $jwtToken->toString(),
             'bearer', // TODO: change this for enum
             $token->getExpiresIn()->getTimestamp(),
-            $token->getRefreshToken(),
+            $jwtRefreshToken->toString(),
         );
     }
 }
