@@ -20,6 +20,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Auth/Credential/Infrastructure/Persistence/Doctrine/Mapping'
                 prefix: 'App\Auth\Credential\Domain'
                 alias: App\Auth\Credential\Domain
+            Authorization:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Auth/Authorization/Infrastructure/Persistence/Doctrine/Mapping'
+                prefix: 'App\Auth\Authorization\Domain'
+                alias: App\Auth\Authorization\Domain
 
 when@test:
     doctrine:

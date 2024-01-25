@@ -36,7 +36,7 @@ class ClientCredentialAccessTokenMethod implements AccessTokenMethod
             new \DateTimeImmutable('+1 month'), // TODO valueObject
         );
 
-        // TODO implement RefreshTokenRepository
+        $this->refreshTokenRepository->save($refreshToken);
 
         return $this->generateToken->generateAccessToken($token, $refreshToken);
     }

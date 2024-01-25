@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Authorization\Infrastructure\Persistence\Doctrine\Repository;
+namespace App\Auth\Authorization\Infrastructure\Persistence\Repository;
 
 use App\Auth\Authorization\Domain\Token;
 use App\Auth\Authorization\Domain\TokenSaveRepository;
@@ -12,6 +12,6 @@ final class DoctrineTokenSaveRepository extends DoctrineRepository implements To
 {
     public function save(Token $token): void
     {
-        return;
+        $this->persist($token);
     }
 }
