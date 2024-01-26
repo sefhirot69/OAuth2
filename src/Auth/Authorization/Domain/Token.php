@@ -15,18 +15,17 @@ final class Token extends AggregateRoot
     private function __construct(
         private readonly UuidInterface $id,
         private readonly Client $client,
-        private readonly \DateTimeImmutable $expiresIn,
+        private readonly ExpiresIn $expiresIn,
     ) {
     }
 
     public static function create(
         Client $client,
-        \DateTimeImmutable $expiresIn,
     ): self {
         return new self(
             Uuid::uuid7(),
             $client,
-            $expiresIn,
+            ExpiresIn::makeExpiresInToken(),
         );
     }
 
@@ -42,7 +41,7 @@ final class Token extends AggregateRoot
 
     public function getExpiresIn(): \DateTimeImmutable
     {
-        return $this->expiresIn;
+        return $this->expiresIn->value();
     }
 
     public function getClientIdentifier(): string

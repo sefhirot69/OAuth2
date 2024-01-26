@@ -9,7 +9,7 @@
             <join-column name="token_id" referenced-column-name="id" nullable="false"/>
         </many-to-one>
 
-        <field name="expiresIn" type="datetime_immutable" column="expires_in" nullable="false"/>
+        <embedded name="expiresIn" class="App\Auth\Authorization\Domain\ExpiresIn" use-column-prefix="false"/>
 
     </entity>
 </doctrine-mapping>

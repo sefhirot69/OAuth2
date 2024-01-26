@@ -24,19 +24,13 @@ class ClientCredentialAccessTokenMethod implements AccessTokenMethod
 
     public function getAccessToken(GenerateTokenCommand $command, Client $client): AccessToken
     {
-        $token = Token::create(
-            $client,
-            new \DateTimeImmutable('+8 hour'), // TODO valueObject
-        );
+        $token = Token::create($client);
 
         $this->tokenSaveRepository->save(
             $token
         );
 
-        $refreshToken = RefreshToken::create(
-            $token,
-            new \DateTimeImmutable('+1 month'), // TODO valueObject
-        );
+        $refreshToken = RefreshToken::create($token);
 
         $this->refreshTokenRepository->save($refreshToken);
 
