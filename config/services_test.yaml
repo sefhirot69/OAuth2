@@ -1,5 +1,5 @@
 imports:
-    - { resource: 'parameters.yaml' }
+    - { resource: 'parameters_test.yaml' }
 
 parameters:
 
@@ -18,9 +18,6 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\Shared\Infrastructure\Listener\SymfonyExceptionListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception, method: onException }
 
     _instanceof:
         # all services implementing the CommandHandlerInterface
@@ -32,6 +29,3 @@ services:
         App\Shared\Domain\Bus\Query\QueryHandler:
             tags:
                 - { name: messenger.message_handler, bus: query.bus }
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
