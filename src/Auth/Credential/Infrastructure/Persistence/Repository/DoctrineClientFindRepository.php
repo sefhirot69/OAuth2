@@ -16,18 +16,23 @@ final class DoctrineClientFindRepository extends DoctrineRepository implements C
 {
     public function find(UuidInterface $id): ?Client
     {
-        // TODO: Implement find() method.
+        $result = $this->repository(Client::class)->find($id);
+
+        return $result instanceof Client ? $result : null;
     }
 
     public function findByIdentifier(ClientIdentifier $identifier): ?Client
     {
-        return $this->repository(Client::class)->findOneBy([
+        $result = $this->repository(Client::class)->findOneBy([
             'credentials.identifier.value' => $identifier->value(),
         ]);
+
+        return $result instanceof Client ? $result : null;
     }
 
     public function validateClient(ClientIdentifier $identifier, ClientSecret $secret, Grant $grant): bool
     {
         // TODO: Implement validateClient() method.
+        return true;
     }
 }

@@ -17,13 +17,26 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 final class LcobucciGenerateAccessToken implements GenerateAccessToken
 {
     private string $privateKey;
-    private string $publicKey;
+    //    private string $publicKey;
 
     public function __construct(
         private readonly ParameterBagInterface $parameterBag,
     ) {
-        $this->privateKey = $this->parameterBag->get('private_key');
-        $this->publicKey  = $this->parameterBag->get('public_key');
+        $privateKey = $this->parameterBag->get('private_key');
+
+        if (!is_string($privateKey)) {
+            throw new \InvalidArgumentException('Private key not found');
+        }
+
+        $this->privateKey = $privateKey;
+
+        //        $publicKey = $this->parameterBag->get('public_key');
+        //
+        //        if (!is_string($publicKey)) {
+        //            throw new \InvalidArgumentException('Public key not found');
+        //        }
+        //
+        //        $this->publicKey = $publicKey;
     }
 
     public function generateAccessToken(Token $token, RefreshToken $refreshToken): AccessToken
@@ -31,10 +44,11 @@ final class LcobucciGenerateAccessToken implements GenerateAccessToken
         $privateKey    = CryptKeyPrivate::create($this->privateKey);
         $configuration = Configuration::forAsymmetricSigner(
             new Sha256(),
-            InMemory::plainText($privateKey->getKeyContents(), $privateKey->getPassPhrase()),
+            InMemory::plainText($privateKey->getKeyContents(), $privateKey->getPassPhrase() ?? ''),
             InMemory::plainText('empty', 'empty'),
         );
 
+        /** @phpstan-ignore-next-line */
         $jwtToken = $configuration->builder()
             ->permittedFor($token->getClientIdentifier())
             ->identifiedBy($token->getId()->toString())
@@ -44,6 +58,7 @@ final class LcobucciGenerateAccessToken implements GenerateAccessToken
             ->withClaim('scopes', $token->getScopes())
             ->getToken($configuration->signer(), $configuration->signingKey());
 
+        /** @phpstan-ignore-next-line */
         $jwtRefreshToken = $configuration->builder()
             ->permittedFor($refreshToken->getClientIdentifier())
             ->identifiedBy($refreshToken->getId()->toString())

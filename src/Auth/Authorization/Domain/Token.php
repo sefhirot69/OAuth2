@@ -44,6 +44,9 @@ final class Token extends AggregateRoot
         return $this->expiresIn->value();
     }
 
+    /**
+     * @return string
+     */
     public function getClientIdentifier(): string
     {
         return $this->client->getIdentifier();

@@ -42,6 +42,9 @@ final class RefreshToken extends AggregateRoot
         return $this->expiresIn->value();
     }
 
+    /**
+     * @return string
+     */
     public function getClientIdentifier(): string
     {
         return $this->token->getClientIdentifier();

@@ -7,6 +7,7 @@ namespace App\Shared\Domain\Utils\Key;
 abstract class CryptKey
 {
     private const FILE_PREFIX = 'file://';
+    private string $keyContents;
 
     protected function __construct(
         private string $keyPath,
@@ -26,9 +27,15 @@ abstract class CryptKey
             if (!\is_readable($keyPath)) {
                 throw new \LogicException(\sprintf('Key path "%s" does not exist or is not readable', $keyPath));
             }
-            $this->keyContents = \file_get_contents($keyPath);
+            $contents = \file_get_contents($keyPath);
+
+            if (false === $contents) {
+                throw new \LogicException('Unable to read key from file '.$keyPath);
+            }
+
+            $this->keyContents = $contents;
             $this->keyPath     = $keyPath;
-            if (!$this->isValidKey($this->keyContents, $this->passPhrase ?? '')) {
+            if (!$this->isValidKey($this->getKeyContents(), $this->passPhrase ?? '')) {
                 throw new \LogicException('Unable to read key from file '.$keyPath);
             }
         } else {
@@ -60,10 +67,14 @@ abstract class CryptKey
     /**
      * Get key contents.
      *
-     * @return string Key contents
+     * @return non-empty-string
      */
     public function getKeyContents(): string
     {
+        if (empty($this->keyContents)) {
+            throw new \LogicException('Key contents are empty');
+        }
+
         return $this->keyContents;
     }
 
