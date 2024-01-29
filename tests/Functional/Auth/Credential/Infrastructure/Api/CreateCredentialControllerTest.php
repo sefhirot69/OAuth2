@@ -2,7 +2,7 @@
 
 namespace App\Tests\Functional\Auth\Credential\Infrastructure\Api;
 
-use App\Tests\Common\MotherFactory;
+use App\Tests\Common\Factory\MotherFactory;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -29,7 +29,15 @@ class CreateCredentialControllerTest extends WebTestCase
                 [],
                 [],
                 [],
-                json_encode(['name' => MotherFactory::random()->company()], JSON_THROW_ON_ERROR)
+                json_encode(
+                    [
+                        'name'   => MotherFactory::random()->company(),
+                        'grants' => ['client_credentials'],
+                        'scopes' => ['all'],
+                    ],
+                    true,
+                    JSON_THROW_ON_ERROR
+                )
             );
 
         $response = $this->client->getResponse();
@@ -37,6 +45,5 @@ class CreateCredentialControllerTest extends WebTestCase
         // THEN
 
         self::assertResponseIsSuccessful();
-        //        self::assertEquals('OK', json_decode($response->getContent(), true)['status']);
     }
 }

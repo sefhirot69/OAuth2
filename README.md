@@ -1,12 +1,12 @@
-![Symfony 6](https://img.shields.io/badge/Symfony-6.2-blueviolet)
+![Symfony 6](https://img.shields.io/badge/Symfony-6.4-blueviolet)
 ![PHP Version](https://img.shields.io/badge/php-8.2-blue.svg)
-[![CI](https://github.com/sefhirot69/template-symfony/actions/workflows/build.yml/badge.svg)](https://github.com/sefhirot69/template-symfony/actions/workflows/build.yml)
+[![CI](https://github.com/sefhirot69/OAuth2/actions/workflows/build.yml/badge.svg)](https://github.com/sefhirot69/OAuth2/actions/workflows/build.yml)
 --------------------------------------
 
-# 🚀 Template Symfony
+# 🚀 OAuth 2
 
-Este es un template para Symfony 6 en php 8.2, con algunas configuraciones ya predefinidas. Para empezar a desarrollar tu propia
-API o microservicio.
+Este es un servicio para Symfony 6.4 en php 8.2, con algunas configuraciones ya predefinidas. Para utilizar en tus proyectos.
+De momento solo tiene implementado el flujo de autorización de tipo __Client Credential__. 
 
 ## 🛠️ Requisitos
 

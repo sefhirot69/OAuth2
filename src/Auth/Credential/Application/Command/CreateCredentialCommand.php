@@ -10,16 +10,35 @@ final class CreateCredentialCommand implements Command
 {
     private function __construct(
         private readonly string $name,
+        private readonly array $grants,
+        private readonly array $scopes = [],
     ) {
     }
 
-    public static function fromName(string $name): self
+    public static function create(
+        string $name,
+        array $grants,
+        array $scopes = [],
+    ): self {
+        return new self(
+            $name,
+            $grants,
+            $scopes
+        );
+    }
+
+    public function getGrants(): array
     {
-        return new self($name);
+        return $this->grants;
     }
 
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getScopes(): array
+    {
+        return $this->scopes;
     }
 }

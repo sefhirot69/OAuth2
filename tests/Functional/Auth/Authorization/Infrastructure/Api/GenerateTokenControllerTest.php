@@ -2,30 +2,34 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Auth\Credential\Infrastructure\Api;
+namespace App\Tests\Functional\Auth\Authorization\Infrastructure\Api;
 
+use App\Auth\Credential\Domain\Client;
+use App\Tests\Unit\Auth\Credential\Domain\ClientFactory;
+use App\Tests\Unit\Auth\Credential\Infrastructure\Api\Dto\GenerateTokenRequestDtoMother;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class GenerateTokenControllerTest extends WebTestCase
 {
     private KernelBrowser $client;
+    private EntityManager $entityManager;
 
     protected function setUp(): void
     {
-        $this->client = self::createClient();
+        $this->client        = self::createClient();
+        $this->entityManager = self::getContainer()->get('doctrine.orm.entity_manager');
     }
 
     /** @test */
     public function itShouldReturnAccessTokenWithGrantTypeClientCredential(): void
     {
         // GIVEN
-
-        $credentials = [
-            'grantType'    => 'client_credentials',
-            'clientId'     => 'admin',
-            'clientSecret' => 'admin',
-        ];
+        $clientFactory = new ClientFactory($this->entityManager);
+        /** @var Client $client */
+        $client      = $clientFactory->create();
+        $credentials = GenerateTokenRequestDtoMother::clientCredentialWithIdentifier($client->getIdentifier());
 
         // WHEN
 
@@ -43,12 +47,5 @@ final class GenerateTokenControllerTest extends WebTestCase
         // THEN
 
         self::assertResponseIsSuccessful();
-
-        /*
-         * TODO: Check response body
-         * access_token
-         * token_type
-         * expires_in
-         */
     }
 }

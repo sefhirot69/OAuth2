@@ -6,3 +6,8 @@ Auth:
     prefix: /api/auth
     resource: ../src/Auth/Credential/Infrastructure/Api/routes.yaml
     trailing_slash_on_root: false
+
+Authorization:
+    prefix: /api/auth
+    resource: ../src/Auth/Authorization/Infrastructure/Api/routes.yaml
+    trailing_slash_on_root: false

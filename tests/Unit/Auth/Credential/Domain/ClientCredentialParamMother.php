@@ -6,6 +6,7 @@ namespace App\Tests\Unit\Auth\Credential\Domain;
 
 use App\Auth\Credential\Domain\ClientCredentialParam;
 use App\Auth\Credential\Domain\ClientName;
+use App\Tests\Common\Factory\MotherFactory;
 
 final class ClientCredentialParamMother
 {
@@ -13,6 +14,16 @@ final class ClientCredentialParamMother
         ClientName $name,
     ): ClientCredentialParam {
         return ClientCredentialParam::createFromName($name);
+    }
+
+    public static function withIdentifier(
+        string $identifier,
+    ): ClientCredentialParam {
+        return new ClientCredentialParam(
+            ClientIdentifierMother::create($identifier),
+            ClientName::fromString(MotherFactory::random()->name()),
+            ClientSecretMother::random(),
+        );
     }
 
     public static function random(): ClientCredentialParam

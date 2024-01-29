@@ -25,7 +25,7 @@ final class CreateCredentialCommandHandlerTest extends TestCase
     {
         // GIVEN
 
-        $request = CreateCredentialCommandMother::randomName();
+        $request = CreateCredentialCommandMother::random();
 
         // WHEN
 

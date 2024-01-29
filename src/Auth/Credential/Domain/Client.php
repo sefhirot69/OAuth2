@@ -11,9 +11,9 @@ final class Client extends AggregateRoot
 {
     public function __construct(
         private UuidInterface $id,
-        private readonly array $grants, // TODO pasar a una coleccion
+        private readonly Grants $grants,
         private readonly ClientCredentialParam $credentials,
-        private readonly array $scopes, // TODO pasar a una coleccion
+        private readonly Scopes $scopes,
         private readonly ?array $redirectUris = null,
         private readonly bool $active = true,
     ) {
@@ -21,9 +21,9 @@ final class Client extends AggregateRoot
 
     public static function create(
         UuidInterface $id,
-        array $grants,
+        Grants $grants,
         ClientCredentialParam $credentials,
-        array $scopes,
+        Scopes $scopes,
         array $redirectUris = null,
         bool $active = true,
     ): self {
@@ -67,7 +67,7 @@ final class Client extends AggregateRoot
      */
     public function getGrants(): array
     {
-        return $this->grants;
+        return $this->grants->getItems();
     }
 
     /**
@@ -75,7 +75,7 @@ final class Client extends AggregateRoot
      */
     public function getScopes(): array
     {
-        return $this->scopes;
+        return $this->scopes->getItems();
     }
 
     public function isActive(): bool

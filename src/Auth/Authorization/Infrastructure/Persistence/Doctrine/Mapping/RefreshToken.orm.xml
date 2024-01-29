@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Auth\Authorization\Domain\RefreshToken" table="auth_refresh_token">
+        <id name="id" type="uuid" length="36" column="id" />
+
+        <many-to-one field="token" target-entity="App\Auth\Authorization\Domain\Token" fetch="EAGER">
+            <join-column name="token_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
+
+        <embedded name="expiresIn" class="App\Auth\Authorization\Domain\ExpiresIn" use-column-prefix="false"/>
+
+    </entity>
+</doctrine-mapping>
