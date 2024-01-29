@@ -3,6 +3,7 @@
 namespace App\Tests\Unit\Auth\Credential\Domain;
 
 use App\Auth\Credential\Domain\Client;
+use App\Auth\Credential\Domain\Scopes;
 use PHPUnit\Framework\TestCase;
 
 class ClientTest extends TestCase
@@ -20,7 +21,7 @@ class ClientTest extends TestCase
             $clientExpected->getId(),
             $clientExpected->getGrants(),
             $clientExpected->getCredentials(),
-            $clientExpected->getScopes()
+            Scopes::create($clientExpected->getScopes())
         );
 
         // THEN

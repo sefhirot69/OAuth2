@@ -9,7 +9,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\JsonType;
 
-final class ClientGrantType extends JsonType
+final class GrantsType extends JsonType
 {
     private const NAME = 'auth_grant';
 

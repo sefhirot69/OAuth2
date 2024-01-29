@@ -15,8 +15,23 @@ final class CreateCredentialCommandMother
         return CreateCredentialCommand::fromName($name);
     }
 
+    public static function create(
+        string $name,
+        array $scopes = [],
+    ): CreateCredentialCommand {
+        return CreateCredentialCommand::create($name, $scopes);
+    }
+
     public static function randomName(): CreateCredentialCommand
     {
         return self::fromName(MotherFactory::random()->company());
+    }
+
+    public static function random(): CreateCredentialCommand
+    {
+        return self::create(
+            MotherFactory::random()->company(),
+            ['all']
+        );
     }
 }

@@ -13,7 +13,7 @@ final class Client extends AggregateRoot
         private UuidInterface $id,
         private readonly array $grants, // TODO pasar a una coleccion
         private readonly ClientCredentialParam $credentials,
-        private readonly array $scopes, // TODO pasar a una coleccion
+        private readonly Scopes $scopes,
         private readonly ?array $redirectUris = null,
         private readonly bool $active = true,
     ) {
@@ -23,7 +23,7 @@ final class Client extends AggregateRoot
         UuidInterface $id,
         array $grants,
         ClientCredentialParam $credentials,
-        array $scopes,
+        Scopes $scopes,
         array $redirectUris = null,
         bool $active = true,
     ): self {
@@ -75,7 +75,7 @@ final class Client extends AggregateRoot
      */
     public function getScopes(): array
     {
-        return $this->scopes;
+        return $this->scopes->getItems();
     }
 
     public function isActive(): bool

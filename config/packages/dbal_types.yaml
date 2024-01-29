@@ -2,5 +2,5 @@ doctrine:
     dbal:
         types:
             uuid: 'Ramsey\Uuid\Doctrine\UuidType'
-            auth_grant: App\Auth\Credential\Infrastructure\Persistence\Doctrine\Mapping\ClientGrantType
-            auth_scope: App\Auth\Credential\Infrastructure\Persistence\Doctrine\Mapping\ClientScopeType
+            auth_grant: App\Auth\Credential\Infrastructure\Persistence\Doctrine\Mapping\GrantsType
+            auth_scope: App\Auth\Credential\Infrastructure\Persistence\Doctrine\Mapping\ScopesType

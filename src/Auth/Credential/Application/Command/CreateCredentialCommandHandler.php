@@ -9,7 +9,7 @@ use App\Auth\Credential\Domain\ClientCredentialParam;
 use App\Auth\Credential\Domain\ClientName;
 use App\Auth\Credential\Domain\ClientSaveRepository;
 use App\Auth\Credential\Domain\Grant;
-use App\Auth\Credential\Domain\Scope;
+use App\Auth\Credential\Domain\Scopes;
 use App\Shared\Domain\Bus\Command\CommandHandler;
 use App\Shared\Domain\Bus\Command\CommandResponse;
 use Ramsey\Uuid\Uuid;
@@ -31,7 +31,9 @@ final class CreateCredentialCommandHandler implements CommandHandler
             ClientCredentialParam::createFromName(
                 ClientName::fromString($name)
             ),
-            Scope::cases(),
+            Scopes::fromArray(
+                $command->getScopes()
+            )
         );
 
         $this->clientSaveRepository->save($client);

@@ -8,6 +8,7 @@ use App\Auth\Credential\Domain\Client;
 use App\Auth\Credential\Domain\ClientCredentialParam;
 use App\Auth\Credential\Domain\Grant;
 use App\Auth\Credential\Domain\Scope;
+use App\Auth\Credential\Domain\Scopes;
 use App\Tests\Common\Factory\MotherFactory;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -18,7 +19,7 @@ final class ClientMother
         UuidInterface $id,
         array $grants,
         ClientCredentialParam $clientCredentialParam,
-        array $scopes,
+        Scopes $scopes,
         array $redirectUris = null,
         bool $active = true,
     ): Client {
@@ -39,7 +40,7 @@ final class ClientMother
             Uuid::uuid7(),
             MotherFactory::random()->randomElements(Grant::cases()),
             ClientCredentialParamMother::withIdentifier($identifier),
-            MotherFactory::random()->randomElements(Scope::cases()),
+            Scopes::fromArray([Scope::ALL->toPrimitive()]),
         );
     }
 
@@ -49,7 +50,7 @@ final class ClientMother
             Uuid::uuid7(),
             MotherFactory::random()->randomElements(Grant::cases()),
             ClientCredentialParamMother::random(),
-            MotherFactory::random()->randomElements(Scope::cases()),
+            Scopes::fromArray([Scope::ALL->toPrimitive()]),
         );
     }
 }
