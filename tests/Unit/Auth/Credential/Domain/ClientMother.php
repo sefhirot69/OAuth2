@@ -7,9 +7,9 @@ namespace App\Tests\Unit\Auth\Credential\Domain;
 use App\Auth\Credential\Domain\Client;
 use App\Auth\Credential\Domain\ClientCredentialParam;
 use App\Auth\Credential\Domain\Grant;
+use App\Auth\Credential\Domain\Grants;
 use App\Auth\Credential\Domain\Scope;
 use App\Auth\Credential\Domain\Scopes;
-use App\Tests\Common\Factory\MotherFactory;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -17,7 +17,7 @@ final class ClientMother
 {
     public static function create(
         UuidInterface $id,
-        array $grants,
+        Grants $grants,
         ClientCredentialParam $clientCredentialParam,
         Scopes $scopes,
         array $redirectUris = null,
@@ -38,7 +38,7 @@ final class ClientMother
     ): Client {
         return self::create(
             Uuid::uuid7(),
-            MotherFactory::random()->randomElements(Grant::cases()),
+            Grants::fromArray([Grant::CLIENT_CREDENTIALS->value]),
             ClientCredentialParamMother::withIdentifier($identifier),
             Scopes::fromArray([Scope::ALL->toPrimitive()]),
         );
@@ -48,7 +48,7 @@ final class ClientMother
     {
         return self::create(
             Uuid::uuid7(),
-            MotherFactory::random()->randomElements(Grant::cases()),
+            Grants::fromArray([Grant::CLIENT_CREDENTIALS->value]),
             ClientCredentialParamMother::random(),
             Scopes::fromArray([Scope::ALL->toPrimitive()]),
         );

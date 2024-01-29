@@ -11,7 +11,7 @@ final class Client extends AggregateRoot
 {
     public function __construct(
         private UuidInterface $id,
-        private readonly array $grants, // TODO pasar a una coleccion
+        private readonly Grants $grants,
         private readonly ClientCredentialParam $credentials,
         private readonly Scopes $scopes,
         private readonly ?array $redirectUris = null,
@@ -21,7 +21,7 @@ final class Client extends AggregateRoot
 
     public static function create(
         UuidInterface $id,
-        array $grants,
+        Grants $grants,
         ClientCredentialParam $credentials,
         Scopes $scopes,
         array $redirectUris = null,
@@ -67,7 +67,7 @@ final class Client extends AggregateRoot
      */
     public function getGrants(): array
     {
-        return $this->grants;
+        return $this->grants->getItems();
     }
 
     /**

@@ -8,7 +8,7 @@ use App\Auth\Credential\Domain\Client;
 use App\Auth\Credential\Domain\ClientCredentialParam;
 use App\Auth\Credential\Domain\ClientName;
 use App\Auth\Credential\Domain\ClientSaveRepository;
-use App\Auth\Credential\Domain\Grant;
+use App\Auth\Credential\Domain\Grants;
 use App\Auth\Credential\Domain\Scopes;
 use App\Shared\Domain\Bus\Command\CommandHandler;
 use App\Shared\Domain\Bus\Command\CommandResponse;
@@ -27,7 +27,9 @@ final class CreateCredentialCommandHandler implements CommandHandler
 
         $client = Client::create(
             Uuid::uuid7(),
-            Grant::cases(),
+            Grants::fromArray(
+                $command->getGrants()
+            ),
             ClientCredentialParam::createFromName(
                 ClientName::fromString($name)
             ),
